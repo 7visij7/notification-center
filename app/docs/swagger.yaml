@@ -1,0 +1,648 @@
+basePath: /api/v1
+definitions:
+  model.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  types.Alert:
+    properties:
+      Description:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      last_triggered_at:
+        type: string
+      name:
+        type: string
+      options:
+        $ref: '#/definitions/types.Options'
+      query_id:
+        type: integer
+      rearm:
+        type: integer
+      state:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+      yitle:
+        type: string
+    type: object
+  types.DnsRecord:
+    properties:
+      action:
+        type: string
+      ip:
+        type: string
+      name:
+        type: string
+    type: object
+  types.Message:
+    properties:
+      text:
+        type: string
+    type: object
+  types.Options:
+    properties:
+      column:
+        type: string
+      op:
+        type: string
+      value:
+        type: integer
+    type: object
+host: devops-api.infra.puls.local
+info:
+  contact: {}
+  description: Let's get it started.
+  title: Devops API.
+  version: "1.0"
+paths:
+  /dns:
+    post:
+      consumes:
+      - application/json
+      description: Create file with dns record
+      parameters:
+      - description: Create dns record
+        in: body
+        name: dnsrecord
+        required: true
+        schema:
+          $ref: '#/definitions/types.DnsRecord'
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Create file with dns record
+      tags:
+      - dns
+  /grafana/devops:
+    post:
+      consumes:
+      - application/json
+      description: Send message "PULS DevOps Monitor" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "PULS DevOps Monitor" telegram chat
+      tags:
+      - grafana
+  /grafana/ecomm:
+    post:
+      consumes:
+      - application/json
+      description: Send message to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "Ecomm" telegram chat
+      tags:
+      - grafana
+  /grafana/markirovka:
+    post:
+      consumes:
+      - application/json
+      description: Send message "PULS Markirovka Alerts" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "PULS Markirovka Alerts" telegram chat
+      tags:
+      - grafana
+  /grafana/markirovka-ktteam:
+    post:
+      consumes:
+      - application/json
+      description: Send message "kt_metrics_alert" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "kt_metrics_alert" telegram chat
+      tags:
+      - grafana
+  /grafana/ovs-dba:
+    post:
+      consumes:
+      - application/json
+      description: Send message "DBA_channel" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "DBA_channel" telegram chat
+      tags:
+      - grafana
+  /grafana/ovs-support:
+    post:
+      consumes:
+      - application/json
+      description: Send message "GRVS_support_alerts" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "GRVS_support_alerts" telegram chat
+      tags:
+      - grafana
+  /redash/devops:
+    post:
+      consumes:
+      - application/json
+      description: Send message "PULS DevOps Monitor" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "PULS DevOps Monitor" telegram chat
+      tags:
+      - redash
+  /redash/markirovka:
+    post:
+      consumes:
+      - application/json
+      description: Send message "PULS Markirovka Alerts" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "PULS Markirovka Alerts" telegram chat
+      tags:
+      - redash
+  /redash/ovs-support:
+    post:
+      consumes:
+      - application/json
+      description: Send message "GRVS support alerts" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Alert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "GRVS support alerts" telegram chat
+      tags:
+      - redash
+  /telegram/devops:
+    post:
+      consumes:
+      - application/json
+      description: Send message "PULS DevOps Monitor" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Message'
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "PULS DevOps Monitor" telegram chat
+      tags:
+      - telegram
+  /telegram/ecomm:
+    post:
+      consumes:
+      - application/json
+      description: Send message to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Message'
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "Ecomm" telegram chat
+      tags:
+      - telegram
+  /telegram/markirovka:
+    post:
+      consumes:
+      - application/json
+      description: Send message "PULS Markirovka Alerts" to telegram chat
+      parameters:
+      - description: Send message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/types.Message'
+      - description: Authorization
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/types.Message'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/model.HTTPError'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Send message to "PULS Markirovka Alerts" telegram chat
+      tags:
+      - telegram
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
