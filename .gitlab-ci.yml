@@ -7,14 +7,14 @@ get_secret:
   tags:
     - k8s-stage-gitlab  
   stage: get_secret
-  image: registry.puls.ru/kubectl
+  image: registry.company.com/kubectl
   services:
-    - name: registry.puls.ru/kubectl
+    - name: registry.company.com/kubectl
       command: ["--mtu=1440"]
   variables:
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_TLS_CERTDIR: ""
-    VAULT_ADDR: https://vault.puls.ru
+    VAULT_ADDR: https://vault.company.com
     VAULT_PATH: devops/devops-api/production
   script:
     - ls -lh
@@ -31,7 +31,7 @@ get_secret:
 build_image:
   stage: build_image
   variables:
-    build_image: registry.puls.ru/devops-api/devops-api:${CI_PIPELINE_ID}
+    build_image: registry.company.com/devops-api/devops-api:${CI_PIPELINE_ID}
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -54,7 +54,7 @@ build_image:
 deploy:
   stage: deploy
   image:
-    name: registry.puls.ru/kubectl
+    name: registry.company.com/kubectl
     entrypoint: [""]
   before_script:
     - mkdir -p ~/.docker
