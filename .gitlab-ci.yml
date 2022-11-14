@@ -1,8 +1,9 @@
 ---
 stages:
-  - get_secret
   - build_image
+  - get_secret
   - deploy
+
 get_secret:
   tags:
     - k8s-stage-gitlab  
@@ -15,10 +16,10 @@ get_secret:
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_TLS_CERTDIR: ""
     VAULT_ADDR: https://vault.company.com
-    VAULT_PATH: devops/devops-api/production
+    VAULT_PATH: devops/ ${CI_PROJECT_NAME}/production
   script:
     - ls -lh
-    - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=devops-api-production-read jwt=$CI_JOB_JWT)"
+    - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=${CI_PROJECT_NAME}-production-read jwt=$CI_JOB_JWT)"
     - ./get_secret
   only:
     refs:
@@ -26,12 +27,12 @@ get_secret:
   artifacts:
     paths:
     - .env
-    expire_in: 3 mins
+    expire_in: 1 mins
 
 build_image:
   stage: build_image
   variables:
-    build_image: registry.company.com/devops-api/devops-api:${CI_PIPELINE_ID}
+    build_image: registry.company.com/${CI_PROJECT_NAME}/${CI_PROJECT_NAME}:${CI_PIPELINE_ID}
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -49,7 +50,7 @@ build_image:
   artifacts:
     paths:
     - .env
-    expire_in: 3 mins
+    expire_in: 1 mins
 
 deploy:
   stage: deploy
@@ -73,7 +74,7 @@ deploy:
     - helm repo add stable https://charts.helm.sh/stable
     - helm repo update
     - cd helm
-    - helm upgrade --atomic devops-api devops-api/ --values devops-api/values.yaml --namespace devops  --debug --set image.tag=${CI_PIPELINE_ID} --timeout 1m --wait
+    - helm upgrade --atomic ${CI_PROJECT_NAME} ${CI_PROJECT_NAME}/ --values ${CI_PROJECT_NAME}/values.yaml --namespace devops  --debug --set image.tag=${CI_PIPELINE_ID} --timeout 1m --wait
     
   tags:
     - k8s-stage-gitlab 

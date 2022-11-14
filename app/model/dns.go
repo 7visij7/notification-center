@@ -8,7 +8,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"github.com/hirochachacha/go-smb2"	
-    "git.puls.ru/devops1/sre/devops-api/types"
+    "git.puls.ru/devops1/sre/notification-center/types"
 )
 
 func CheckDns(dnsrecord types.DnsRecord) (error) {

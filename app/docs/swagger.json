@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "devops-api.infra.puls.local",
+    "host": "notification-center.infra.puls.local",
     "basePath": "/api/v1",
     "paths": {
         "/dns": {

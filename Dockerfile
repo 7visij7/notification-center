@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine
+FROM golang:1.16-alpineAS builder
 WORKDIR /app
 COPY .environment /tmp/.environment
 COPY app/ .
@@ -10,4 +10,10 @@ RUN apk update && apk add git openssh-client ; \
 RUN swag init 
 RUN env GOOS=linux GOARCH=amd64 go build main.go
 CMD /app/main
+
+############################
+FROM scratch
+WORKDIR /app
+COPY --from=builder /app/notification-center /app/notification-center
+ENTRYPOINT ["/app/notification-center"]
 EXPOSE 8080

@@ -1,4 +1,4 @@
-module git.puls.ru/devops1/sre/devops-api
+module git.puls.ru/devops1/sre/notification-center
 
 go 1.13
 

@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"net/http"
 	"github.com/gin-gonic/gin"
-	"git.puls.ru/devops1/sre/devops-api/types"
+	"git.puls.ru/devops1/sre/notification-center/types"
 )
 
 func MessageTelegram(ctx *gin.Context, chat int, token string){

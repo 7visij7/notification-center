@@ -59,7 +59,7 @@ definitions:
       value:
         type: integer
     type: object
-host: devops-api.infra.puls.local
+host: notification-center.infra.puls.local
 info:
   contact: {}
   description: Let's get it started.

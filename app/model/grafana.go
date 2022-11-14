@@ -3,7 +3,7 @@ package model
 import (
 	"fmt"
     "net/http"
-	"git.puls.ru/devops1/sre/devops-api/types"
+	"git.puls.ru/devops1/sre/notification-center/types"
 	"github.com/gin-gonic/gin"
 )
 
