@@ -1,5 +1,5 @@
 # Notification-center
-> The application cleans up old elasticsearch indexes according to ILM.
+> Notification-center is one entry point for services in local network which want to send notification to telegram channel. Realised for Grafana, Redash. And ofcouse any servicec can send message by API.
 
 ___
 ## Build and run application
