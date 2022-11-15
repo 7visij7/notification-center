@@ -1,5 +1,5 @@
 # Notification-center
-> Notification-center is one entry point for services in local network which want to send notification to telegram channel. Realised for Grafana, Redash. And ofcouse any servicec can send message by API.
+> Notification-center is one entry point for services in local network which want to send notification to telegram channel. Realised for Grafana, Redash. And of course any services can send messages by API.
 
 ___
 ## Build and run application
