@@ -1,6 +1,7 @@
 # Notification-center
 > Notification-center is one entry point for services in local network which want to send notification to telegram channel. Realised for Grafana, Redash. And of course any services can send messages by API.
-
+> 
+![Alt text](image.jpg "iNotification center")
 ___
 ## Build and run application
 > Build binary file with all dependency and generate swagger documentation.
